@@ -43,7 +43,7 @@ export default class TodoList extends Component {
             />
             <Button 
             title="Delete" 
-            color="#f194ff" 
+            color="#70f569" 
             onPress={() => this.handleDeleteTask(t.id)}
             />
         </View>
@@ -102,7 +102,7 @@ export class TaskNameForm extends Component {
         />
         <Button 
         title="Add Task" 
-        color="#f194ff" 
+        color="#70f569" 
         onPress = {this.handleSubmit}
         />
       </View>
@@ -113,7 +113,7 @@ export class TaskNameForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fac3c3',
     marginHorizontal: 16,
     paddingTop: 30,
     // justifyContent: 'center',
