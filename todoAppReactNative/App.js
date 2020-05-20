@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Button, View, Text, TextInput, SafeAreaView, ScrollView} from 'react-native';
 import {CheckBox} from "react-native-elements";
+import DatePicker from 'react-native-datepicker'
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class TodoList extends Component {
     return this.state.list.map((t,index) => {
       return (
         <View>
-            <CheckBox title={"Task to do: "+t.name + " Created date" + t.dueDate.getDate()+"-"+(t.dueDate.getMonth()+1)+"-"+t.dueDate.getFullYear()} 
+            <CheckBox title={"Task to do: "+t.name + " Created date " +t.dueDate.getFullYear() +"-"+(t.dueDate.getMonth()+1)+"-"+t.dueDate.getDate()+" Duedate: "+ t.date} 
             checked={t.checked} 
             onPress = {() => this.checkBox_Test(index)}
             />
@@ -81,7 +82,7 @@ export class TaskNameForm extends Component {
     // create a task object
     event.preventDefault();
     const task = {id:Date.now(), name: this.state.TextInputValue, 
-    dueDate: new Date(), checked: false};
+    dueDate: new Date(),date: this.state.date, checked: false};
     // add the task object to the task list
     this.props.onAddTask(task);
     this.setState({TextInputValue: ''})
@@ -100,6 +101,30 @@ export class TaskNameForm extends Component {
         placeholder={"Enter Task"} value = {this.state.TextInputValue} 
         onChangeText = {this.handleChange}
         />
+        <DatePicker
+        style={{width: 200}}
+        date={this.state.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2020-05-01"
+        maxDate="2050-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {this.setState({date: date})}}
+      />
         <Button 
         title="Add Task" 
         color="#70f569" 
